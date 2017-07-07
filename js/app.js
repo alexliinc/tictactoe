@@ -7,41 +7,43 @@ var O = 0;
 var X = 0;
 var turns = 0;
 
-$printYes = function()
+//playing the Game
+$playGame = function()
 {
-  // if $(this).data('clicked')
-  // {
+  if (!$(this).data('clicked'))
+  {
     if (turns % 2 === 0)
     {
       O += parseInt(this.id);
-      //$(this).data('clicked', true);
+      $(this).data('clicked', true);
+      $(this).html("X").css({"color":"blue", "text-align":"center","font-size":"60px"});
+      turns++;
     }
     else
     {
       X += parseInt(this.id);
-      //$(this).data('clicked', true);
+      $(this).data('clicked', true);
+      $(this).html("O").css({"color":"red", "text-align":"center","font-size":"60px"});
+      turns++;
     }
-  //}
-
+  }
+  $winnerWinner();
    console.log(this.id);
-   turns++;
-   $winnerWinner();
    console.log("turns are " + turns);
    console.log("x is " + X);
    console.log("o is " + O);
 }
 
+// Win condition
 $winnerWinner = function(){
-
   if(X === 15 && turns > 2)
   {
-    alert('X is the winner');
+    alert('O is the winner');
   }
   else if (O === 15 && turns > 2) {
-    alert('O is the winner');
+    alert('X is the winner');
   }
 }
 
 
-
-$(".square").on("click", $printYes);
+$(".square").on("click", $playGame);
